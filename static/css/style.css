@@ -1,0 +1,253 @@
+/* 健身热量记录控制推荐系统 —— 移动端样式 */
+:root {
+    --primary: #22c55e;
+    --primary-dark: #16a34a;
+    --accent: #f59e0b;
+    --danger: #ef4444;
+    --bg: #f5f7fa;
+    --card: #ffffff;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --header-h: 50px;
+    --tab-h: 60px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: -apple-system, "PingFang SC", "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* 顶部标题栏 */
+.app-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    height: var(--header-h);
+    background: var(--primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.header-title { font-size: 17px; font-weight: 600; letter-spacing: .5px; }
+
+/* 主内容区 */
+.app-main {
+    flex: 1;
+    padding: 16px 14px calc(var(--tab-h) + 20px);
+    overflow-y: auto;
+}
+
+/* 底部 Tab 导航栏 */
+.tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    height: var(--tab-h);
+    background: var(--card);
+    border-top: 1px solid var(--border);
+    display: flex;
+    z-index: 100;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+.tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 11px;
+    transition: color .15s;
+}
+.tab-icon { font-size: 22px; line-height: 1; }
+.tab-label { font-size: 11px; }
+.tab.active { color: var(--primary-dark); }
+.tab.active .tab-icon { transform: scale(1.1); }
+
+/* 页面标题 */
+.page-head { margin-bottom: 16px; }
+.page-head h1 { font-size: 20px; margin-bottom: 4px; }
+.muted { color: var(--muted); font-size: 13px; }
+
+/* 卡片 */
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.card-label { color: var(--muted); font-size: 12px; margin-bottom: 6px; }
+.card-value { font-size: 26px; font-weight: 700; }
+.card-value .unit { font-size: 12px; color: var(--muted); font-weight: 400; }
+.card.accent { border-color: #fde68a; background: #fffbeb; }
+.card.good { border-color: #bbf7d0; }
+.card.bad { border-color: #fecaca; }
+.card-tag {
+    display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 8px;
+    border-radius: 20px; background: #f0fdf4; color: var(--primary-dark);
+}
+.card.bad .card-tag { background: #fef2f2; color: var(--danger); }
+
+/* 面板 */
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.04);
+}
+.panel h2 { font-size: 15px; margin-bottom: 14px; }
+
+/* 键值对 */
+.kv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.kv { background: #f9fafb; border-radius: 10px; padding: 12px; }
+.kv span { display: block; color: var(--muted); font-size: 12px; margin-bottom: 4px; }
+.kv b { font-size: 15px; }
+.accent-text { color: var(--primary-dark); }
+
+/* 图表 */
+.chart { display: flex; align-items: flex-end; gap: 8px; height: 150px; padding-top: 16px; }
+.bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; }
+.bars { display: flex; gap: 3px; align-items: flex-end; flex: 1; }
+.bar { width: 14px; border-radius: 3px 3px 0 0; min-height: 2px; }
+.bar.intake { background: var(--primary); }
+.bar.burned { background: var(--accent); }
+.bar-date { font-size: 10px; color: var(--muted); margin-top: 5px; }
+.legend { display: flex; gap: 14px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.legend .dot { display: inline-block; width: 9px; height: 9px; border-radius: 2px; margin-right: 4px; }
+.dot.intake { background: var(--primary); }
+.dot.burned { background: var(--accent); }
+
+/* 搜索框 */
+.search-box input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.search-box input:focus { outline: none; border-color: var(--primary); }
+
+/* 食物/运动列表 */
+.food-list { list-style: none; }
+.food-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--border);
+}
+.food-info { flex: 1; min-width: 0; }
+.food-info b { display: block; font-size: 14px; margin-bottom: 2px; }
+.food-info .muted { font-size: 11px; }
+.food-add { display: flex; gap: 6px; align-items: center; flex-shrink: 0; }
+.amount-input {
+    width: 60px;
+    padding: 7px 8px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+}
+
+/* 按钮 */
+.btn {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background .15s;
+}
+.btn:active { background: var(--primary-dark); }
+.btn.small { padding: 7px 12px; font-size: 13px; }
+.btn.danger { background: var(--danger); }
+.btn.danger:active { background: #dc2626; }
+
+/* 记录列表 */
+.record-head {
+    display: grid;
+    grid-template-columns: 46px 1fr 60px 80px 50px;
+    gap: 6px;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 4px;
+}
+.record-list { list-style: none; }
+.record-item {
+    display: grid;
+    grid-template-columns: 46px 1fr 60px 80px 50px;
+    gap: 6px;
+    align-items: center;
+    padding: 12px 4px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+.record-list .empty { padding: 30px 10px; text-align: center; color: var(--muted); font-size: 13px; }
+.meal {
+    display: inline-block;
+    width: 26px; height: 26px;
+    line-height: 26px;
+    text-align: center;
+    border-radius: 50%;
+    font-size: 11px;
+    color: #fff;
+}
+.meal-breakfast { background: #f59e0b; }
+.meal-lunch { background: #ef4444; }
+.meal-dinner { background: #8b5cf6; }
+.meal-snack { background: #06b6d4; }
+
+/* 营养素 */
+.nutri-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.nutri { text-align: center; padding: 14px 10px; background: #f9fafb; border-radius: 12px; }
+.nutri-num { font-size: 20px; font-weight: 700; color: var(--primary-dark); }
+.nutri-label { font-size: 12px; color: var(--muted); margin: 4px 0 8px; }
+.nutri-bar { height: 7px; background: #e5e7eb; border-radius: 4px; overflow: hidden; }
+.nutri-bar div { height: 100%; background: var(--primary); border-radius: 4px; }
+
+/* 建议列表 */
+.tips { list-style: none; }
+.tips li { padding: 9px 0 9px 22px; position: relative; font-size: 14px; line-height: 1.6; }
+.tips li::before { content: "✓"; position: absolute; left: 0; color: var(--primary-dark); font-weight: 700; }
+
+/* 表单 */
+.profile-form .form-row { display: flex; align-items: center; margin-bottom: 14px; }
+.profile-form label { width: 110px; font-size: 14px; color: var(--muted); flex-shrink: 0; }
+.profile-form input, .profile-form select {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 14px;
+    background: #fff;
+}
+.profile-form input:focus, .profile-form select:focus { outline: none; border-color: var(--primary); }
+.profile-form .btn { margin-top: 8px; width: 100%; padding: 12px; font-size: 15px; }

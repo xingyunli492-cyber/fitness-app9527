@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}运动记录 · 健身热量管理{% endblock %}
+{% block header %}运动记录{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>运动记录</h1>
+    <p class="muted">{{ today }} · 今日已消耗 <b>{{ total }} kcal</b></p>
+</div>
+
+<div class="two-col">
+    <div class="panel">
+        <h2>添加运动</h2>
+        <div class="search-box">
+            <input type="text" id="exercise-search" placeholder="搜索运动，如：跑步、跳绳…">
+        </div>
+        <ul class="food-list" id="exercise-list">
+            {% for e in exercises %}
+            <li class="food-item" data-id="{{ e.id }}" data-name="{{ e.name }}" data-met="{{ e.met }}">
+                <div class="food-info">
+                    <b>{{ e.name }}</b>
+                    <span class="muted">MET {{ e.met }}</span>
+                </div>
+                <div class="food-add">
+                    <input type="number" class="amount-input" placeholder="分钟" min="1" value="30">
+                    <button class="btn small add-exercise-btn">添加</button>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h2>今日运动清单</h2>
+        <div class="record-head">
+            <span>运动</span><span>时长</span><span>消耗</span><span></span>
+        </div>
+        <ul class="record-list" id="exercise-records">
+            {% for r in records %}
+            <li class="record-item" data-id="{{ r.id }}">
+                <span>{{ r.exercise_name }}</span>
+                <span>{{ r.minutes }} 分钟</span>
+                <span>{{ r.calories }} kcal</span>
+                <button class="btn small danger del-exercise-btn">删除</button>
+            </li>
+            {% else %}
+            <li class="empty">今天还没记录运动，动起来吧</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

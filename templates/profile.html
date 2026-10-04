@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}个人档案 · 健身热量管理{% endblock %}
+{% block header %}个人档案{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>个人档案</h1>
+    <p class="muted">完善你的身体数据，用于计算基础代谢与推荐方案</p>
+</div>
+
+<div class="panel form-panel">
+    <form method="POST" class="profile-form">
+        <div class="form-row">
+            <label>性别</label>
+            <select name="gender">
+                <option value="male" {{ 'selected' if profile.gender == 'male' }}>男</option>
+                <option value="female" {{ 'selected' if profile.gender == 'female' }}>女</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label>年龄（岁）</label>
+            <input type="number" name="age" value="{{ profile.age }}" min="10" max="100" required>
+        </div>
+        <div class="form-row">
+            <label>身高（cm）</label>
+            <input type="number" step="0.1" name="height_cm" value="{{ profile.height_cm }}" min="100" max="250" required>
+        </div>
+        <div class="form-row">
+            <label>体重（kg）</label>
+            <input type="number" step="0.1" name="weight_kg" value="{{ profile.weight_kg }}" min="30" max="300" required>
+        </div>
+        <div class="form-row">
+            <label>目标体重（kg）</label>
+            <input type="number" step="0.1" name="target_weight" value="{{ profile.target_weight }}" min="30" max="300" required>
+        </div>
+        <div class="form-row">
+            <label>活动水平</label>
+            <select name="activity_level">
+                <option value="sedentary" {{ 'selected' if profile.activity_level == 'sedentary' }}>久坐少动</option>
+                <option value="light" {{ 'selected' if profile.activity_level == 'light' }}>轻度活动（每周1~3次）</option>
+                <option value="moderate" {{ 'selected' if profile.activity_level == 'moderate' }}>中度活动（每周3~5次）</option>
+                <option value="high" {{ 'selected' if profile.activity_level == 'high' }}>高度活动（每周6~7次）</option>
+                <option value="extreme" {{ 'selected' if profile.activity_level == 'extreme' }}>极高活动</option>
+            </select>
+        </div>
+        <div class="form-row">
+            <label>减脂目标</label>
+            <select name="goal">
+                <option value="mild" {{ 'selected' if profile.goal == 'mild' }}>温和减脂（缺口 300 kcal）</option>
+                <option value="normal" {{ 'selected' if profile.goal == 'normal' }}>标准减脂（缺口 500 kcal）</option>
+                <option value="strict" {{ 'selected' if profile.goal == 'strict' }}>强化减脂（缺口 700 kcal）</option>
+            </select>
+        </div>
+        <button type="submit" class="btn">保存并生成方案</button>
+    </form>
+</div>
+{% endblock %}

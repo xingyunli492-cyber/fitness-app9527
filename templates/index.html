@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}仪表盘 · 健身热量管理{% endblock %}
+{% block header %}仪表盘{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>今日概览</h1>
+    <p class="muted">{{ today }}</p>
+</div>
+
+<div class="cards">
+    <div class="card">
+        <div class="card-label">今日摄入</div>
+        <div class="card-value">{{ summary.intake }} <span class="unit">kcal</span></div>
+    </div>
+    <div class="card">
+        <div class="card-label">运动消耗</div>
+        <div class="card-value">{{ summary.burned }} <span class="unit">kcal</span></div>
+    </div>
+    <div class="card accent">
+        <div class="card-label">建议摄入目标</div>
+        <div class="card-value">{{ summary.target }} <span class="unit">kcal</span></div>
+    </div>
+    <div class="card {{ 'good' if summary.remaining >= 0 else 'bad' }}">
+        <div class="card-label">剩余可摄入</div>
+        <div class="card-value">{{ summary.remaining }} <span class="unit">kcal</span></div>
+        <div class="card-tag">{{ summary.status }}</div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>基础代谢 & 热量缺口</h2>
+    <div class="kv-grid">
+        <div class="kv"><span>基础代谢 BMR</span><b>{{ rec.bmr }} kcal/天</b></div>
+        <div class="kv"><span>每日总消耗 TDEE</span><b>{{ rec.tdee }} kcal/天</b></div>
+        <div class="kv"><span>热量缺口</span><b>-{{ rec.deficit }} kcal/天</b></div>
+        <div class="kv"><span>目标摄入</span><b>{{ rec.target_intake }} kcal/天</b></div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>近 7 日摄入 / 消耗趋势</h2>
+    <div class="chart" id="trend-chart">
+        {% for t in trend %}
+        <div class="bar-group" title="{{ t.date }}">
+            <div class="bars">
+                <div class="bar intake" style="height: {{ (t.intake / 3000 * 100) | round }}px"></div>
+                <div class="bar burned" style="height: {{ (t.burned / 3000 * 100) | round }}px"></div>
+            </div>
+            <div class="bar-date">{{ t.date[5:] }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="legend">
+        <span><i class="dot intake"></i>摄入</span>
+        <span><i class="dot burned"></i>消耗</span>
+    </div>
+</div>
+{% endblock %}

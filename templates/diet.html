@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}饮食记录 · 健身热量管理{% endblock %}
+{% block header %}饮食记录{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>饮食记录</h1>
+    <p class="muted">{{ today }} · 今日已摄入 <b>{{ total }} kcal</b></p>
+</div>
+
+<div class="two-col">
+    <div class="panel">
+        <h2>添加食物</h2>
+        <div class="search-box">
+            <input type="text" id="food-search" placeholder="搜索食物，如：鸡胸肉、米饭…">
+        </div>
+        <ul class="food-list" id="food-list">
+            {% for f in foods %}
+            <li class="food-item" data-id="{{ f.id }}" data-name="{{ f.name }}"
+                data-cal="{{ f.calories_per_100g }}">
+                <div class="food-info">
+                    <b>{{ f.name }}</b>
+                    <span class="muted">{{ f.category }} · {{ f.calories_per_100g }} kcal/100g</span>
+                </div>
+                <div class="food-add">
+                    <input type="number" class="amount-input" placeholder="克" min="1" value="100">
+                    <button class="btn small add-food-btn">添加</button>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="panel">
+        <h2>今日饮食清单</h2>
+        <div class="record-head">
+            <span>餐次</span><span>食物</span><span>克数</span><span>热量</span><span></span>
+        </div>
+        <ul class="record-list" id="diet-records">
+            {% for r in records %}
+            <li class="record-item" data-id="{{ r.id }}">
+                <span class="meal meal-{{ r.meal_type }}">{{ {'breakfast':'早','lunch':'午','dinner':'晚','snack':'加'}[r.meal_type] }}</span>
+                <span>{{ r.food_name }}</span>
+                <span>{{ r.amount_g }}g</span>
+                <span>{{ r.calories }} kcal</span>
+                <button class="btn small danger del-diet-btn">删除</button>
+            </li>
+            {% else %}
+            <li class="empty">今天还没记录饮食，快去添加吧</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

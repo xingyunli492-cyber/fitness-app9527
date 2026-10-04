@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}方案推荐 · 健身热量管理{% endblock %}
+{% block header %}方案推荐{% endblock %}
+{% block content %}
+<div class="page-head">
+    <h1>个性化方案推荐</h1>
+    <p class="muted">基于你的基础代谢与热量缺口算法自动生成</p>
+</div>
+
+<div class="panel">
+    <h2>你的减脂参数</h2>
+    <div class="kv-grid">
+        <div class="kv"><span>基础代谢 BMR</span><b>{{ rec.bmr }} kcal</b></div>
+        <div class="kv"><span>每日总消耗 TDEE</span><b>{{ rec.tdee }} kcal</b></div>
+        <div class="kv"><span>减脂目标</span><b>{{ rec.goal_name }}（{{ rec.goal_desc }}）</b></div>
+        <div class="kv"><span>活动水平</span><b>{{ rec.activity_name }}（系数 {{ rec.activity_factor }}）</b></div>
+        <div class="kv"><span>每日热量缺口</span><b>{{ rec.deficit }} kcal</b></div>
+        <div class="kv"><span>建议摄入热量</span><b class="accent-text">{{ rec.target_intake }} kcal/天</b></div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>每日营养素配比建议</h2>
+    <div class="nutri-grid">
+        <div class="nutri">
+            <div class="nutri-num">{{ rec.protein_g }}g</div>
+            <div class="nutri-label">蛋白质</div>
+            <div class="nutri-bar"><div style="width: 60%"></div></div>
+        </div>
+        <div class="nutri">
+            <div class="nutri-num">{{ rec.carb_g }}g</div>
+            <div class="nutri-label">碳水化合物</div>
+            <div class="nutri-bar"><div style="width: 40%"></div></div>
+        </div>
+        <div class="nutri">
+            <div class="nutri-num">{{ rec.fat_g }}g</div>
+            <div class="nutri-label">脂肪</div>
+            <div class="nutri-bar"><div style="width: 30%"></div></div>
+        </div>
+        <div class="nutri">
+            <div class="nutri-num">{{ rec.water_ml }}ml</div>
+            <div class="nutri-label">建议饮水</div>
+            <div class="nutri-bar"><div style="width: 80%"></div></div>
+        </div>
+    </div>
+</div>
+
+<div class="panel">
+    <h2>执行建议</h2>
+    <ul class="tips">
+        <li>每日摄入控制在 <b>{{ rec.target_intake }} kcal</b> 左右，制造约 <b>{{ rec.deficit }} kcal</b> 缺口。</li>
+        <li>蛋白质优先：每日至少 <b>{{ rec.protein_g }}g</b>（约 {{ (rec.protein_g / 100) | round(1) }} 份鸡胸肉）。</li>
+        <li>每周进行 <b>3~5 次</b> 有氧 + 力量训练，配合饮食更高效。</li>
+        <li>保证每日饮水 <b>{{ rec.water_ml }}ml</b>，充足睡眠，避免极端节食。</li>
+    </ul>
+</div>
+{% endblock %}

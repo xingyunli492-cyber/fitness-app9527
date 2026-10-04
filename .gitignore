@@ -1,0 +1,28 @@
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# 测试覆盖率
+.coverage
+htmlcov/
+
+# 数据库（运行时生成，不入库）
+fitness.db
+*.db
+*.sqlite3
+
+# 虚拟环境
+venv/
+.venv/
+
+# 日志
+*.log
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# 临时文件
+*.tmp
